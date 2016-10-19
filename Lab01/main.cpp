@@ -10,7 +10,7 @@ struct student {
 
 student *initiateStudent(string, int, float);
 
-student *highestScorer(student *stud[], int totalStudents);
+student *highestScorer(student **stud, int totalStudents);
 
 int main()
 {
@@ -47,16 +47,16 @@ student *initiateStudent(string name, int age, float marks)
     return ret;
 }
 
-student *highestScorer(student *stud[], int totalStudents)
+student *highestScorer(student **stud, int totalStudents)
 {
-    student *topper = stud[0];
+    student *topper = *stud;
 
     for (int i = 1; i < totalStudents; i++)
     {
-        if (stud[i]->marks > topper->marks)
-        {
-            topper = stud[i];
-        }
+        stud++;
+
+        if ((*stud)->marks > topper->marks)
+            topper = *stud;
     }
 
     return topper;
